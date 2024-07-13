@@ -23,7 +23,7 @@ export default function Header() {
             </button>
             <button
               type="button"
-              className="bg-purple-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
+              className="bg-fuchsia-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
             >
               Sponser a child
             </button>
@@ -39,4 +39,3 @@ export default function Header() {
     </header>
   );
 }
-

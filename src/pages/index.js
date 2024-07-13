@@ -1,3 +1,12 @@
+import Carousel from "@/widgets/Carousel";
+import HomeContent from "@/widgets/HomeContent";
+
 export default function Home() {
-  return <div>hwllo there</div>;
+  return (
+    <>
+      <Carousel>
+        <HomeContent />
+      </Carousel>
+    </>
+  );
 }
