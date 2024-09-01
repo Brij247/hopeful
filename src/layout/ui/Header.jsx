@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <header className="sticky top-0 bg-white shadow-lg z-50">
+    <header className="sticky top-0 bg-white bg-opacity-30 backdrop-blur-lg shadow-lg z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex-shrink-0">
@@ -23,7 +23,8 @@ export default function Header() {
             </button>
             <button
               type="button"
-              className="bg-purple-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
+              className="bg-fuchsia-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
+              onClick={() => window.open("/sponser-a-child")}
             >
               Sponser a child
             </button>
