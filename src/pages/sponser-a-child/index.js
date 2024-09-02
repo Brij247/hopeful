@@ -36,7 +36,6 @@ export default function Payment() {
       }),
     }).then((t) => t.json());
 
-    console.log(data);
     let options = {
       key: "rzp_test_ydLpxOQOvDmfFx",
       name: "EXCEL HOPE",
@@ -87,32 +86,48 @@ export default function Payment() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length === 0) {
-      // Proceed to payment
-      handlePayment();
-    } else {
-      setErrors(validationErrors);
-    }
+    // e.preventDefault();
+    // const validationErrors = validate();
+    // if (Object.keys(validationErrors).length === 0) {
+    // Proceed to payment
+    handlePayment();
+    // } else {
+    //   setErrors(validationErrors);
+    // }
   };
   const images = ["/hope-image1.jpg", "/hope-image2.jpg"];
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-4xl flex">
-        <div className="w-1/2 bg-gray-200 p-4 flex flex-col justify-center items-center">
-          <div className="carousel-item">
-            <img src={images[0]} className="object-cover w-full h-full" />
+        <div className="w-1/2  p-8">
+          <div>
+            <h2 className="text-2xl font-semibold mb-6">Payment Form</h2>
           </div>
+          {/* <div className="carousel-item">
+            <img src={images[0]} className="object-cover w-full h-full" />
+          </div> */}
         </div>
         <div className="w-1/2 p-8">
-          <h2 className="text-2xl font-semibold mb-6">Payment Form</h2>
+          <textarea
+            placeholder="How do you know about Excel hope?"
+            id="message"
+            name="message"
+            className="w-full p-3 border border-gray-300 rounded"
+            value={formData.message}
+            onChange={handleChange}
+          ></textarea>
+          <textarea
+            placeholder="Are you planning to contribute monthly or yearly?"
+            id="message"
+            name="message"
+            className="w-full p-3 border border-gray-300 rounded"
+            value={formData.message}
+            onChange={handleChange}
+          ></textarea>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2" htmlFor="name">
-                Name
-              </label>
               <input
+                placeholder="name"
                 type="text"
                 id="name"
                 name="name"
@@ -125,10 +140,8 @@ export default function Payment() {
               )}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2" htmlFor="email">
-                Email
-              </label>
               <input
+                placeholder="email"
                 type="email"
                 id="email"
                 name="email"
@@ -141,10 +154,8 @@ export default function Payment() {
               )}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2" htmlFor="phone">
-                Phone Number
-              </label>
               <input
+                placeholder="mobile number"
                 type="tel"
                 id="phone"
                 name="phone"
@@ -157,10 +168,8 @@ export default function Payment() {
               )}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 mb-2" htmlFor="message">
-                Message
-              </label>
               <textarea
+                placeholder="message"
                 id="message"
                 name="message"
                 className="w-full p-3 border border-gray-300 rounded"
@@ -168,14 +177,9 @@ export default function Payment() {
                 onChange={handleChange}
               ></textarea>
             </div>
-            {/* <button
-            type="submit"
-            className="w-full bg-blue-500 text-white p-3 rounded hover:bg-blue-600 transition duration-300"
-          >
-            Proceed to Payment
-          </button> */}
+
             <button
-              type="button"
+              type="submit"
               className="bg-fuchsia-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
               //   onClick={() => handlePayment()}
             >

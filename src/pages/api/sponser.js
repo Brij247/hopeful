@@ -1,38 +1,14 @@
 const Razorpay = require("razorpay");
 
-// const razorpay = new Razorpay({
-//   key_id: "rzp_test_ydLpxOQOvDmfFx",
-//   key_secret: "CnGgEVguSR37fnPzQ0N2sPUU",
-// });
-
 export default async function handler(req, res) {
-  //   if (req.method === "POST") {
-  //     const { amount } = req.body;
-
-  //     try {
-  //       const order = await razorpay.orders.create({
-  //         amount,
-  //         currency: "INR",
-  //       });
-  //       res.status(200).json(order);
-  //     } catch (error) {
-  //       res.status(500).json({ error: error.message });
-  //     }
-  //   } else {
-  //     res.status(405).end("Method Not Allowed");
-  //   }
   const { taxAmt } = req.body;
   //console.log('taxAmt',taxAmt*100)
   if (req.method === "POST") {
     // Initialize razorpay object
-    // const razorpay = new Razorpay({
     const razorpay = new Razorpay({
       key_id: "rzp_test_ydLpxOQOvDmfFx",
       key_secret: "CnGgEVguSR37fnPzQ0N2sPUU",
     });
-    //   key_id: process.env.RAZORPAY_KEY,
-    //   key_secret: process.env.RAZORPAY_SECRET,
-    // });
 
     // Create an order -> generate the OrderID -> Send it to the Front-end
     // Also, check the amount and currency on the backend (Security measure)
