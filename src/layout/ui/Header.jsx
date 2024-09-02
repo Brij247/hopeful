@@ -1,4 +1,8 @@
+import { signIn, signOut, useSession } from "next-auth/react";
+
 export default function Header() {
+  const { session, status } = useSession();
+
   return (
     <header className="sticky top-0 bg-white bg-opacity-30 backdrop-blur-lg shadow-lg z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,8 +35,11 @@ export default function Header() {
             <button
               type="button"
               className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded-lg shadow"
+              onClick={
+                status === "authenticated" ? () => signOut() : () => signIn()
+              }
             >
-              Sign in
+              {status === "authenticated" ? "Sign out" : "Sign in"}
             </button>
           </nav>
         </div>
