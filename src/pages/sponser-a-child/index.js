@@ -1,5 +1,3 @@
-import Razorpay from "razorpay";
-
 import { useState } from "react";
 
 export default function Payment() {
@@ -7,54 +5,47 @@ export default function Payment() {
     return new Promise((resolve) => {
       const script = document.createElement("script");
       script.src = "https://checkout.razorpay.com/v1/checkout.js";
-
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
-
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
       document.body.appendChild(script);
     });
   };
 
   const handlePayment = async () => {
-    // e.preventDefault();
     const res = await initializeRazorpay();
     if (!res) {
       alert("Razorpay SDK Failed to load");
       return;
     }
+
     const data = await fetch("/api/sponser", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        taxAmt: 100,
+        amount: Number(formData.amount),
+        ...formData, // optionally pass donor details to backend
       }),
     }).then((t) => t.json());
 
-    let options = {
-      key: "rzp_test_ydLpxOQOvDmfFx",
-      name: "EXCEL HOPE",
+    console.log(data, "Data");
+    const options = {
+      key: "rzp_test_ydLpxOQOvDmfFx", // use from .env
+      name: "Excel Hope",
       currency: data.currency,
       amount: data.amount,
       order_id: data.id,
-      description: "Thankyou for your test donation",
-      image: "./hope-logo.png",
+      description: "Thank you for your donation",
+      image: "/hope-logo.png",
       handler: function (response) {
-        alert("Razorpay Response: " + response.razorpay_payment_id);
+        alert("Payment ID: " + response.razorpay_payment_id);
+        // optionally: POST to backend for verification
       },
       prefill: {
-        name: "Brijitha AV",
-        email: "brijithaav@gmail.com",
-        contact: "9853785519",
+        name: formData.name,
+        email: formData.email,
+        contact: formData.phone,
       },
-      theme: {
-        color: "#d946ef",
-      },
+      theme: { color: "#d946ef" },
     };
 
     const paymentObject = new window.Razorpay(options);
@@ -65,6 +56,9 @@ export default function Payment() {
     name: "",
     email: "",
     phone: "",
+    amount: "",
+    referral: "",
+    frequency: "",
     message: "",
   });
 
@@ -75,65 +69,43 @@ export default function Payment() {
     if (!formData.name) errors.name = "Name is required";
     if (!formData.email) errors.email = "Email is required";
     if (!formData.phone) errors.phone = "Phone number is required";
+    if (!formData.amount || isNaN(Number(formData.amount))) {
+      errors.amount = "Valid donation amount is required";
+    }
     return errors;
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
-    // const validationErrors = validate();
-    // if (Object.keys(validationErrors).length === 0) {
-    // Proceed to payment
-    handlePayment();
-    // } else {
-    //   setErrors(validationErrors);
-    // }
+    e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length === 0) {
+      setErrors({});
+      handlePayment();
+    } else {
+      setErrors(validationErrors);
+    }
   };
-  const images = ["/hope-image1.jpg", "/hope-image2.jpg"];
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-4xl flex">
-        <div className="w-1/2  p-8">
-          <div>
-            <h2 className="text-2xl font-semibold mb-6">Payment Form</h2>
-          </div>
-          {/* <div className="carousel-item">
-            <img src={images[0]} className="object-cover w-full h-full" />
-          </div> */}
+        <div className="w-1/2 p-8">
+          <h2 className="text-2xl font-semibold mb-6">Donate to Excel Hope</h2>
         </div>
         <div className="w-1/2 p-8">
-          <textarea
-            placeholder="How do you know about Excel hope?"
-            id="message"
-            name="message"
-            className="w-full p-3 border border-gray-300 rounded"
-            value={formData.message}
-            onChange={handleChange}
-          ></textarea>
-          <textarea
-            placeholder="Are you planning to contribute monthly or yearly?"
-            id="message"
-            name="message"
-            className="w-full p-3 border border-gray-300 rounded"
-            value={formData.message}
-            onChange={handleChange}
-          ></textarea>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <input
-                placeholder="name"
-                type="text"
-                id="name"
+                placeholder="Full Name"
                 name="name"
-                className="w-full p-3 border border-gray-300 rounded"
                 value={formData.name}
                 onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded"
               />
               {errors.name && (
                 <p className="text-red-500 text-sm">{errors.name}</p>
@@ -141,13 +113,12 @@ export default function Payment() {
             </div>
             <div className="mb-4">
               <input
-                placeholder="email"
+                placeholder="Email Address"
                 type="email"
-                id="email"
                 name="email"
-                className="w-full p-3 border border-gray-300 rounded"
                 value={formData.email}
                 onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded"
               />
               {errors.email && (
                 <p className="text-red-500 text-sm">{errors.email}</p>
@@ -155,33 +126,60 @@ export default function Payment() {
             </div>
             <div className="mb-4">
               <input
-                placeholder="mobile number"
+                placeholder="Mobile Number"
                 type="tel"
-                id="phone"
                 name="phone"
-                className="w-full p-3 border border-gray-300 rounded"
                 value={formData.phone}
                 onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded"
               />
               {errors.phone && (
                 <p className="text-red-500 text-sm">{errors.phone}</p>
               )}
             </div>
             <div className="mb-4">
-              <textarea
-                placeholder="message"
-                id="message"
-                name="message"
-                className="w-full p-3 border border-gray-300 rounded"
-                value={formData.message}
+              <input
+                placeholder="Donation amount (INR)"
+                type="number"
+                name="amount"
+                value={formData.amount}
                 onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded"
+              />
+              {errors.amount && (
+                <p className="text-red-500 text-sm">{errors.amount}</p>
+              )}
+            </div>
+            <div className="mb-4">
+              <textarea
+                placeholder="How do you know about Excel Hope?"
+                name="referral"
+                value={formData.referral}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded"
               ></textarea>
             </div>
-
+            <div className="mb-4">
+              <textarea
+                placeholder="Are you planning to contribute monthly or yearly?"
+                name="frequency"
+                value={formData.frequency}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded"
+              ></textarea>
+            </div>
+            <div className="mb-4">
+              <textarea
+                placeholder="Your message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded"
+              ></textarea>
+            </div>
             <button
               type="submit"
               className="bg-fuchsia-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
-              //   onClick={() => handlePayment()}
             >
               Proceed to payment
             </button>
