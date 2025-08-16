@@ -1,4 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function Header() {
   const { session, status } = useSession();
@@ -11,28 +12,16 @@ export default function Header() {
             <img className="h-20 w-auto" src="./hope-logo.png" alt="Logo" />
           </div>
           <nav className="space-x-10">
-            <a
-              href="#about"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              About us
-            </a>
-            <button>
-              <a
-                href="#login"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Projects
-              </a>
-            </button>
+            <Link href="/">Home</Link>
+            <Link href="/about-us">About us</Link>
+            <Link href="/project">Projects</Link>
             <button
               type="button"
               className="bg-fuchsia-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
-              onClick={() => window.open("/sponser-a-child")}
             >
-              Sponser a child
+              <Link href={"/sponser-a-child"}>Sponser a child</Link>
             </button>
-            <button
+            {/* <button
               type="button"
               className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded-lg shadow"
               onClick={
@@ -40,7 +29,7 @@ export default function Header() {
               }
             >
               {status === "authenticated" ? "Sign out" : "Sign in"}
-            </button>
+            </button> */}
           </nav>
         </div>
       </div>
