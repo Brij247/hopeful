@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function Header() {
@@ -9,7 +10,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-2">
-            <img className="h-12 w-12 rounded-full" src="/hope-logo.png" alt="Excel Hope Logo" />
+            <Image className="h-12 w-12 rounded-full" src="/hope-logo.png" alt="Excel Hope Logo" width={48} height={48} />
             <span className="font-bold text-xl text-gray-800 hidden sm:inline">Excel HOPE</span>
           </div>
 
