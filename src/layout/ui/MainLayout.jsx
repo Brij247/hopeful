@@ -1,3 +1,13 @@
+import Footer from "./Footer";
+// export default function MainLayout({ Page }) {
+//   return <>{Page}</>;
+
 export default function MainLayout({ Page }) {
-  return <>{Page}</>;
+  return (
+    <>
+      {Page}
+      <Footer />
+    </>
+  );
 }
+// }
