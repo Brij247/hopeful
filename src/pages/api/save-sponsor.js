@@ -144,6 +144,31 @@ export default async function handler(req, res) {
 
     console.log("✅ Data saved to:", sheetName);
 
+    // Send notification emails after successful registration
+    try {
+      await fetch(`${process.env.BASE_URL || "http://localhost:3000"}/api/send-email`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          timestamp,
+          sponsorName,
+          sponsorEmail,
+          sponsorPhone,
+          sponsorAddress,
+          childName,
+          project,
+          monthlyAmount,
+          donationFrequency,
+          hearAboutUs,
+          message,
+        }),
+      });
+      console.log("✅ Notification emails sent");
+    } catch (emailError) {
+      console.error("⚠️ Error sending notification emails:", emailError);
+      // Don't fail the form submission if email fails
+    }
+
     return res.status(200).json({
       success: true,
       message: "Sponsor registered successfully!",
