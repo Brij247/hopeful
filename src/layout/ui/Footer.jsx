@@ -128,12 +128,12 @@ export default function Footer() {
           <h4 className="font-semibold mb-4 text-white">Contact Us</h4>
           <div className="space-y-2 text-gray-400 text-sm leading-relaxed">
             <p>📧 support@excelhope.org</p>
-            <p>📞 +91 94963 25026</p>
-            <p>📞 +91 94958 34994</p>
+            <p>📞 +91 94959 27117</p>
+            <p>📞 +91 97468 18422</p>
             <p>
-              📍 PB No-82, Pathanamthitta P O,
+              📍 Excel Hope, Kumbanad P O,
               <br />
-              Kerala - 689645
+              Pathanamthitta dist, Kerala - 689547
             </p>
           </div>
         </div>
