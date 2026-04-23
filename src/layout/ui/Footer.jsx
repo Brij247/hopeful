@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -10,9 +11,11 @@ export default function Footer() {
             {" "}
             <div className="flex items-center gap-3 mb-4">
               {" "}
-              <img
+              <Image
                 src="/hope-logo.png"
                 alt="Excel Hope Logo"
+                width={40}
+                height={40}
                 className="h-10 w-10 rounded-full"
               />{" "}
               <span className="text-xl font-bold tracking-wide">
@@ -159,6 +162,15 @@ export default function Footer() {
         <p className="mt-1">
           Managed under Excel Ministries | Registered Society
         </p>
+        <div className="mt-4 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
+          <Link href="/privacy-policy" className="hover:text-white transition duration-300">
+            Privacy Policy
+          </Link>
+          <span className="hidden sm:inline text-gray-600">•</span>
+          <Link href="/license" className="hover:text-white transition duration-300">
+            License
+          </Link>
+        </div>
       </div>
     </footer>
   );

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const images = ["/hope-image1.jpg", "/hope-image2.jpg"];
 
@@ -21,10 +22,12 @@ const Carousel = ({ children }) => {
             index === currentIndex ? "opacity-100" : "opacity-0"
           }`}
         >
-          <img
+          <Image
             src={image}
             alt={`Slide ${index}`}
-            className="object-cover w-full h-full"
+            fill
+            className="object-cover"
+            priority={index === 0}
           />
         </div>
       ))}

@@ -115,7 +115,7 @@ export default function AboutUs() {
               </h4>
               <p className="text-gray-700 leading-relaxed">
                 Initially the commitment is for one year. The progress of the
-                child is evaluated yearly and eligible children's contract is
+                child is evaluated yearly and eligible children&apos;s contract is
                 renewed for continued support.
               </p>
             </div>
@@ -231,7 +231,7 @@ export default function AboutUs() {
         <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-12 rounded-lg shadow-lg text-white text-center">
           <h3 className="text-3xl font-bold mb-4">Join Us in This Mission</h3>
           <p className="text-lg mb-8 max-w-2xl mx-auto">
-            We invite you to be part of Excel HOPE's journey to transform lives
+            We invite you to be part of Excel HOPE&apos;s journey to transform lives
             through education. Whether as a sponsor, volunteer, or supporter,
             your contribution makes a real difference.
           </p>
@@ -266,7 +266,7 @@ export default function AboutUs() {
             </a>
           </p>
           <p className="text-gray-600 text-lg">
-            Have questions? We'd love to hear from you!
+            Have questions? We&apos;d love to hear from you!
           </p>
         </div>
       </div>

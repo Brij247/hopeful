@@ -118,7 +118,7 @@ export default function SponsorAChild() {
             💝 Sponsor a Child
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Transform a child's life through education. Your sponsorship
+            Transform a child&apos;s life through education. Your sponsorship
             provides not just education, but also meals, counseling, and
             spiritual guidance. Every rupee makes a difference!
           </p>
@@ -188,7 +188,7 @@ export default function SponsorAChild() {
               <li>Choose a project location</li>
               <li>Select your monthly contribution</li>
               <li>Submit your registration</li>
-              <li>We'll contact you with child details</li>
+              <li>We&apos;ll contact you with child details</li>
             </ol>
             <p className="text-sm mt-4 italic">
               Your information is securely saved and helps us match you with a
@@ -297,7 +297,7 @@ export default function SponsorAChild() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Child's Name (Optional)
+                    Child&apos;s Name (Optional)
                   </label>
                   <input
                     type="text"
@@ -419,10 +419,10 @@ export default function SponsorAChild() {
             {/* Submit Button */}
             <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
               <p className="text-sm text-gray-600 mb-4">
-                ✅ By clicking 'Submit Registration', your information will be
+                ✅ By clicking &apos;Submit Registration&apos;, your information will be
                 securely saved to our system. We will contact you shortly to
                 confirm your sponsorship and provide details about the child
-                you're sponsoring.
+                you&apos;re sponsoring.
               </p>
               <button
                 type="submit"

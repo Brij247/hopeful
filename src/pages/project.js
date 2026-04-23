@@ -170,7 +170,7 @@ export default function Project() {
         <div className="bg-gradient-to-r from-pink-600 to-rose-600 text-white p-12 rounded-lg text-center">
           <h3 className="text-3xl font-bold mb-4">Make a Difference Today</h3>
           <p className="text-lg mb-6 max-w-2xl mx-auto">
-            By sponsoring a child, you're not just providing education. You're
+            By sponsoring a child, you&apos;re not just providing education. You&apos;re
             transforming a life and building a brighter future for the entire
             family and community.
           </p>
